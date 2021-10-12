@@ -16,6 +16,16 @@ Limner colorizes and transforms CLI outputs.
 lm -- kubectl get po
 ```
 
+```bash
+lm -- cat nginx-deploy.yml
+```
+
+```bash
+lm -- curl https://api.github.com/
+```
+
+// TODO
+
 ### Create an alias (Recommended)
 
 Take `kubectl` as an example. In your `.bash_profile`, `.zprofile`, etc., append the following:

@@ -24,15 +24,16 @@ func (cp *ColorPrinter) Print(r io.Reader, w io.Writer) {
 	// }
 
 	// otherwise, try to determine the type
-	// if shouldYaml() {
+	// s := bufio.NewScanner(r)
+	// if shouldYaml(cp.Args, s) {
 	// 	printer = &YamlPrinter{
 	// 		LightBg: cp.LightBg,
 	// 	}
-	// } else if shouldJson() {
+	// } else if shouldJson(cp.Args, s) {
 	// 	printer = &JsonPrinter{
 	// 		LightBg: cp.LightBg,
 	// 	}
-	// } else if shouldTable() {
+	// } else if shouldTable(cp.Args, s) {
 	// 	printer = &TablePrinter{
 	// 		LightBg: cp.LightBg,
 	// 	}
