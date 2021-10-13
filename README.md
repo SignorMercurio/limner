@@ -2,7 +2,7 @@
 
 Limner colorizes and transforms CLI outputs.
 
-// TODO
+[![asciicast](https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu.svg)](https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu)
 
 ## Installation
 
@@ -12,16 +12,22 @@ Limner colorizes and transforms CLI outputs.
 
 ### Basic Usage
 
+Colorize tables:
+
 ```bash
 kubectl get po|lm
 ```
+
+Colorize YAML files:
 
 ```bash
 cat nginx-deploy.yml|lm
 ```
 
+Colorize JSON responses:
+
 ```bash
-curl https://api.github.com/|lm
+curl https://api.github.com/SignorMercurio|lm
 ```
 
 // TODO
@@ -59,11 +65,12 @@ Thank you for willing to contribute to this project!
 
 ## LICENSE
 
-MIT
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ## Acknowledgements
 
 Inspired by the following incredible projects:
 
+- [cobra](https://github.com/spf13/cobra)
 - [kubecolor](https://github.com/dty1er/kubecolor)
 - [yh](https://github.com/andreazorzetto/yh)
