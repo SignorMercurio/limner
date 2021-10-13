@@ -1,10 +1,18 @@
-# limner
+<p align="center">
+<img src="img/logo.png" width="256" />
+</p>
 
-[![MIT License][license-shield]][license-url]
+<h1 align="center">Limner</h1>
+
+<div align="center">
 
 Limner colorizes and transforms CLI outputs.
 
-[![asciicast](https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu.svg)](https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu)
+<a href="https://github.com/SignorMercurio/limner/blob/main/LICENSE"> <img src="https://img.shields.io/github/license/SignorMercurio/limner?style=for-the-badge" /> </a>
+
+</div>
+
+<a href="https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu" target="_blank"><img src="https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu.svg" /></a>
 
 ## Installation
 
@@ -75,7 +83,7 @@ Thank you for willing to contribute to this project!
   - [ ] ...
 - [ ] Simple data format transformation
   - [ ] YAML <-> JSON
-  - ...
+  - [ ] ...
 
 If you have any suggestions for the project, please don't hesitate to open an [issue](https://github.com/SignorMercurio/limner/issues) or [pull request](https://github.com/SignorMercurio/limner/pulls).
 
@@ -90,6 +98,3 @@ Inspired by the following incredible projects:
 - [cobra](https://github.com/spf13/cobra)
 - [kubecolor](https://github.com/dty1er/kubecolor)
 - [yh](https://github.com/andreazorzetto/yh)
-
-[license-shield]: https://img.shields.io/github/license/SignorMercurio/limner?style=for-the-badge
-[license-url]: https://github.com/SignorMercurio/limner/blob/main/LICENSE
