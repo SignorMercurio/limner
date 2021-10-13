@@ -13,13 +13,14 @@ import (
 )
 
 var (
-	cfgFile  string
-	mustType string
-	input    []byte
-	output   []byte
-	Stdout   = colorable.NewColorableStdout()
-	RootCmd  = NewRootCmd()
-	Log      = logrus.New()
+	cfgFile   string
+	plainMode bool
+	mustType  string
+	input     []byte
+	output    []byte
+	Stdout    = colorable.NewColorableStdout()
+	RootCmd   = NewRootCmd()
+	Log       = logrus.New()
 )
 
 // getPrinter returns a ColorPrinter
@@ -27,14 +28,6 @@ var getPrinter = func(mustType string) *printer.ColorPrinter {
 	return &printer.ColorPrinter{
 		Type: mustType,
 	}
-	// ErrorPrinter: &printer.CustomPrinter{
-	// 	ColorPicker: func(line string) color.Color {
-	// 		if strings.HasPrefix(strings.ToLower(line), "error") {
-	// 			return color.Red
-	// 		}
-	// 		return color.Yellow
-	// 	},
-	// },
 }
 
 // NewRootCmd represents the base command when called without any subcommands
@@ -56,12 +49,17 @@ func NewRootCmd() *cobra.Command {
 			output = input
 		},
 		PersistentPostRun: func(cmd *cobra.Command, args []string) {
-			printer := getPrinter(mustType)
-			printer.Print(string(output), Stdout)
+			var p printer.Printer
+			if plainMode {
+				p = &printer.PlainPrinter{}
+			} else {
+				p = getPrinter(mustType)
+			}
+			p.Print(string(output), Stdout)
 		},
 	}
 	cmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.limner.yaml)")
-	// cmd.PersistentFlags().BoolVarP(&plainMode, "plain", "p", false, "Do not colorize the output")
+	cmd.PersistentFlags().BoolVarP(&plainMode, "plain", "p", false, "Do not colorize the output")
 	// cmd.PersistentFlags().BoolVar(&lightBg, "light-bg", false, "Adapt a more suitable color theme in a terminal with light background")
 	cmd.PersistentFlags().StringVarP(&mustType, "type", "t", "", "Force limner to view the output as a specific type: yaml / json / xml / table, etc.")
 

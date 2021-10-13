@@ -28,7 +28,7 @@ curl https://api.github.com/|lm
 
 ### Non-terminal output
 
-When you choose to output the result to a file, or pass the result to other programs, through a pipe `|` or redirection `>`, you certainly do not want limner to colorize the output. The `--plain` flag in every subcommand is meant for this, which prevent limner from colorizing the output.
+When you choose to output the result to a file, or pass the result to other programs, through a pipe `|` or redirection `>`, you certainly do not want limner to colorize the output. The `--plain` flag is meant for this, which prevent limner from colorizing the output.
 
 ### Custom color themes
 
