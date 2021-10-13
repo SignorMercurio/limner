@@ -29,10 +29,10 @@ func (cp *ColorPrinter) Print(buf string, w io.Writer) {
 		switch {
 		case shouldYaml(buf):
 			printer = NewYamlPrinter()
-			// case shouldJson(buf):
-			// 	printer = NewJsonPrinter()
-			// case shouldTable(buf):
-			// 	printer = NewTablePrinter()
+		// case shouldJson(buf):
+		// 	printer = NewJsonPrinter()
+		case shouldTable(buf):
+			printer = NewTablePrinter(ColorStatus)
 		}
 	}
 	// Finally, we can print something
@@ -61,6 +61,22 @@ func shouldYaml(buf string) bool {
 	return err == nil
 }
 
+func shouldTable(buf string) bool {
+	lines := 2
+	splitted := strings.SplitN(buf, "\n", lines+1)
+	actualLines := len(splitted)
+	if actualLines < lines {
+		lines = actualLines
+	}
+
+	for i := 0; i < lines; i++ {
+		if splitted[i] != "" && strings.ToUpper(splitted[i]) == splitted[i] {
+			return true
+		}
+	}
+	return false
+}
+
 func seemNegative(status string) bool {
 	negativeKeywords := []string{
 		"fail",
@@ -75,9 +91,10 @@ func seemNegative(status string) bool {
 		"evict",
 		"bad",
 		"timeout",
+		"panic",
+		"fatal",
 	}
 
-	status = strings.ToLower(status)
 	for _, v := range negativeKeywords {
 		if strings.Contains(status, v) {
 			return true
@@ -87,23 +104,16 @@ func seemNegative(status string) bool {
 }
 
 func seemWarning(status string) bool {
-	warningKeywords := []string{
-		"ing",
-	}
-
-	status = strings.ToLower(status)
-	for _, v := range warningKeywords {
-		if strings.Contains(status, v) {
-			return true
-		}
-	}
-	return false
+	return strings.Contains(status, "ing")
 }
 
 func seemPositive(status string) bool {
 	positiveKeywords := []string{
 		"ok",
-		"ed",
+		"ted",
+		"led",
+		"ged",
+		"zed",
 		"success",
 		"succeed",
 		"ready",
@@ -113,7 +123,6 @@ func seemPositive(status string) bool {
 		"done",
 	}
 
-	status = strings.ToLower(status)
 	for _, v := range positiveKeywords {
 		if strings.Contains(status, v) {
 			return true
@@ -123,6 +132,7 @@ func seemPositive(status string) bool {
 }
 
 func ColorStatus(_ int, status string) (color.Color, bool) {
+	status = strings.ToLower(status)
 	switch {
 	// the order matters!
 	case seemNegative(status):

@@ -12,5 +12,5 @@ type SingleColorPrinter struct {
 }
 
 func (scp *SingleColorPrinter) Print(buf string, w io.Writer) {
-	fmt.Fprintln(w, color.Apply(buf, scp.Color))
+	fmt.Fprint(w, color.Apply(buf, scp.Color))
 }
