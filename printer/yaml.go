@@ -125,6 +125,10 @@ func (yp *YamlPrinter) colorKey(key string) string {
 
 // colorValue colorizes the yaml value
 func (yp *YamlPrinter) colorValue(value string) string {
+	if value == "{}" {
+		return "{}"
+	}
+
 	format := "%s"
 	if yp.isString(value) {
 		format = `"%s"`

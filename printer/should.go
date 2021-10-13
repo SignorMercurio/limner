@@ -1,6 +1,7 @@
 package printer
 
 import (
+	"encoding/json"
 	"strings"
 
 	"gopkg.in/yaml.v3"
@@ -25,6 +26,11 @@ func shouldYaml(buf string) bool {
 	out := make(map[string]interface{})
 	err := yaml.Unmarshal([]byte(result), out)
 
+	return err == nil
+}
+
+func shouldJson(buf string, jsonObj *map[string]interface{}) bool {
+	err := json.Unmarshal([]byte(buf), jsonObj)
 	return err == nil
 }
 
