@@ -13,67 +13,22 @@ Limner colorizes and transforms CLI outputs.
 ### Basic Usage
 
 ```bash
-lm -- kubectl get po
+kubectl get po|lm
 ```
 
 ```bash
-lm -- cat nginx-deploy.yml
+cat nginx-deploy.yml|lm
 ```
 
 ```bash
-lm -- curl https://api.github.com/
+curl https://api.github.com/|lm
 ```
 
 // TODO
-
-### Create an alias (Recommended)
-
-Take `kubectl` as an example. In your `.bash_profile`, `.zprofile`, etc., append the following:
-
-```bash
-alias k="lm -- kubectl"
-```
-
-Then you'll be able to use `kubectl` like normal, with the ability provided by limner:
-
-```bash
-k get po
-```
-
-// TODO
-
-### Autocompletion
-
-To utilize the autocompetion for the original command, you may need to apply some changes to your shell config files.
-
-#### Bash
-
-Take `kubectl` as an example. In your `.bashrc`, append the following:
-
-```bash
-complete -o default -F __start_kubectl limner
-```
-
-#### Zsh
-
-Take `kubectl` as an example. In your `.zshrc`, append the following:
-
-```bash
-source <(kubectl completion zsh)
-compdef lm=kubectl
-```
-
-If you encounter problems like `command not found: compdef`, you may need to write it like:
-
-```bash
-autoload -Uz compinit; compinit
-source <(kubectl completion zsh)
-compdef lm=kubectl
-```
 
 ### Non-terminal output
 
-When you choose to output the result to a file, or pass the result to other programs, through a pipe `|` or redirection `>`, you certainly do not want limner to colorize the output. The `--plain` flag is meant for this, which prevent limner from colorizing the output.
+When you choose to output the result to a file, or pass the result to other programs, through a pipe `|` or redirection `>`, you certainly do not want limner to colorize the output. The `--plain` flag in every subcommand is meant for this, which prevent limner from colorizing the output.
 
 ### Custom color themes
 
@@ -84,8 +39,10 @@ When you choose to output the result to a file, or pass the result to other prog
 Specify `-t` to force limner to view the output as a specific type: YAML / JSON / XML / table, etc. For example:
 
 ```bash
-lm -t yml k describe deploy/nginx
+k describe deploy/nginx | lm -t yml
 ```
+
+> You don't actually need to use the flag at most of the time because limner automatically detects the possible format of the output.
 
 // TODO
 
