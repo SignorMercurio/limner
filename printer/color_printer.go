@@ -2,41 +2,33 @@ package printer
 
 import (
 	"io"
-
-	"github.com/SignorMercurio/limner/color"
 )
 
 type ColorPrinter struct {
-	Type    string
-	LightBg bool
-	Args    []string
+	Type string
+	Args []string
 }
 
 func (cp *ColorPrinter) Print(r io.Reader, w io.Writer) {
-	var printer Printer = &SingleColorPrinter{Color: color.Green}
+	var printer Printer = &SingleColorPrinter{Color: StringColor}
 
 	// change the printer if type is already enforced
-	// switch cp.Type {
-	// case "yaml","yml":
-	// case "json":
-	// case "xml":
-	// case "table":
-	// }
+	switch cp.Type {
+	case "yaml", "yml":
+		printer = &YamlPrinter{}
+		// case "json":
+		// case "table":
+		// case "xml":
+	}
 
 	// otherwise, try to determine the type
 	// s := bufio.NewScanner(r)
 	// if shouldYaml(cp.Args, s) {
-	// 	printer = &YamlPrinter{
-	// 		LightBg: cp.LightBg,
-	// 	}
+	// 	printer = &YamlPrinter{}
 	// } else if shouldJson(cp.Args, s) {
-	// 	printer = &JsonPrinter{
-	// 		LightBg: cp.LightBg,
-	// 	}
+	// 	printer = &JsonPrinter{}
 	// } else if shouldTable(cp.Args, s) {
-	// 	printer = &TablePrinter{
-	// 		LightBg: cp.LightBg,
-	// 	}
+	// 	printer = &TablePrinter{}
 	// }
 
 	// Finally, we can print something

@@ -42,13 +42,42 @@ k get po
 
 // TODO
 
+### Autocompletion
+
+To utilize the autocompetion for the original command, you may need to apply some changes to your shell config files.
+
+#### Bash
+
+Take `kubectl` as an example. In your `.bashrc`, append the following:
+
+```bash
+complete -o default -F __start_kubectl limner
+```
+
+#### Zsh
+
+Take `kubectl` as an example. In your `.zshrc`, append the following:
+
+```bash
+source <(kubectl completion zsh)
+compdef lm=kubectl
+```
+
+If you encounter problems like `command not found: compdef`, you may need to write it like:
+
+```bash
+autoload -Uz compinit; compinit
+source <(kubectl completion zsh)
+compdef lm=kubectl
+```
+
 ### Non-terminal output
 
 When you choose to output the result to a file, or pass the result to other programs, through a pipe `|` or redirection `>`, you certainly do not want limner to colorize the output. The `--plain` flag is meant for this, which prevent limner from colorizing the output.
 
-### On light backgrounds
+### Custom color themes
 
-Specify `--light-bg` to adapt a more suitable color theme in a terminal with light background
+// TODO
 
 ### Enforce types on the output
 

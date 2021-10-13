@@ -35,12 +35,11 @@ type Printers struct {
 }
 
 // getPrinters return a pair of printers
-var getPrinters = func(mustType string, lightBg bool, args []string) *Printers {
+var getPrinters = func(mustType string, args []string) *Printers {
 	return &Printers{
 		ColorPrinter: &printer.ColorPrinter{
-			Type:    mustType,
-			LightBg: lightBg,
-			Args:    args,
+			Type: mustType,
+			Args: args,
 		},
 		ErrorPrinter: &printer.CustomPrinter{
 			ColorPicker: func(line string) color.Color {
@@ -93,7 +92,7 @@ func NewRootCmd() *cobra.Command {
 				return err
 			}
 
-			printers := getPrinters(mustType, lightBg, actualArgs)
+			printers := getPrinters(mustType, actualArgs)
 
 			wg := &sync.WaitGroup{}
 			wg.Add(2)
@@ -112,7 +111,7 @@ func NewRootCmd() *cobra.Command {
 	}
 	cmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.limner.yaml)")
 	cmd.PersistentFlags().BoolVar(&plainMode, "plain", false, "Do not colorize the output")
-	cmd.PersistentFlags().BoolVar(&lightBg, "light-bg", false, "Adapt a more suitable color theme in a terminal with light background")
+	// cmd.PersistentFlags().BoolVar(&lightBg, "light-bg", false, "Adapt a more suitable color theme in a terminal with light background")
 	cmd.PersistentFlags().StringVarP(&mustType, "type", "t", "", "Force limner to view the output as a specific type: yaml / json / xml / table, etc.")
 
 	return cmd
