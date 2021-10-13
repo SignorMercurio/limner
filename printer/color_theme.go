@@ -12,7 +12,7 @@ var (
 	NullColor   = color.Cyan
 	HeaderColor = color.Blue
 
-	ColumnColor = []color.Color{
+	ColumnColors = []color.Color{
 		color.White,
 		color.Cyan,
 	}

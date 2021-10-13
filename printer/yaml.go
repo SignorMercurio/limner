@@ -1,7 +1,6 @@
 package printer
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"strings"
@@ -13,12 +12,14 @@ type YamlPrinter struct {
 	inString bool
 }
 
-func (yp *YamlPrinter) Print(r io.Reader, w io.Writer) {
-	s := bufio.NewScanner(r)
-	for s.Scan() {
-		line := s.Text()
+func (yp *YamlPrinter) Print(buf string, w io.Writer) {
+	for _, line := range strings.Split(buf, "\n") {
 		yp.printYaml(line, w)
 	}
+}
+
+func NewYamlPrinter() *YamlPrinter {
+	return &YamlPrinter{}
 }
 
 // printYaml prints a line as yaml format

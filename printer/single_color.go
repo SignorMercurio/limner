@@ -1,7 +1,6 @@
 package printer
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 
@@ -12,10 +11,6 @@ type SingleColorPrinter struct {
 	Color color.Color
 }
 
-func (scp *SingleColorPrinter) Print(r io.Reader, w io.Writer) {
-	s := bufio.NewScanner(r)
-	for s.Scan() {
-		line := s.Text()
-		fmt.Fprintln(w, color.Apply(line, scp.Color))
-	}
+func (scp *SingleColorPrinter) Print(buf string, w io.Writer) {
+	fmt.Fprintln(w, color.Apply(buf, scp.Color))
 }
