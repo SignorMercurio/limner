@@ -27,6 +27,7 @@ func NewJsonPrinter(jsonObj map[string]interface{}) *JsonPrinter {
 	}
 }
 
+// printJson prints a line to writer w in json format
 func (jp *JsonPrinter) printJson(line string, w io.Writer) {
 	indentCnt := getIndent(line)
 	indent := toSpaces(indentCnt)
@@ -52,6 +53,7 @@ func (jp *JsonPrinter) printJson(line string, w io.Writer) {
 	fmt.Fprintf(w, "%s%s: %s\n", indent, jp.colorKey(key), jp.colorValue(value))
 }
 
+// colorKey colorizes json keys
 func (jp *JsonPrinter) colorKey(key string) string {
 	format := "%s"
 	if strings.HasSuffix(key, ":") {
@@ -64,6 +66,7 @@ func (jp *JsonPrinter) colorKey(key string) string {
 	return fmt.Sprintf(format, color.Apply(key, KeyColor))
 }
 
+// colorValue colorizes json values
 func (jp *JsonPrinter) colorValue(value string) string {
 	switch value {
 	case "{", "[", "{}", "{},":
@@ -84,6 +87,7 @@ func (jp *JsonPrinter) colorValue(value string) string {
 	return fmt.Sprintf(format, color.Apply(value, getColorByValueType(value)))
 }
 
+// isString returns if the line is double quoted
 func (jp *JsonPrinter) isString(line string) bool {
 	return strings.HasPrefix(line, `"`) && (strings.HasSuffix(line, `"`) || strings.HasSuffix(line, `",`))
 }

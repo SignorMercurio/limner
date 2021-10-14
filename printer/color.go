@@ -45,6 +45,7 @@ func (cp *ColorPrinter) Print(buf string, w io.Writer) {
 	printer.Print(buf, w)
 }
 
+// ColorStatus colorizes the status based on status texts
 func ColorStatus(_ int, status string) (color.Color, bool) {
 	status = strings.ToLower(status)
 	switch {

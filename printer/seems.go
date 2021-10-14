@@ -7,6 +7,7 @@ import (
 	"github.com/SignorMercurio/limner/color"
 )
 
+// seemsNegative guesses if the status is something negative
 func seemsNegative(status string) bool {
 	negativeKeywords := []string{
 		"fail",
@@ -34,10 +35,12 @@ func seemsNegative(status string) bool {
 	return false
 }
 
+// seemsWarning guesses if the status is something that's between negative and positive
 func seemsWarning(status string) bool {
 	return strings.Contains(status, "ing")
 }
 
+// seemsPositive guesses if the status is something positive
 func seemsPositive(status string) bool {
 	positiveKeywords := []string{
 		"ok",
@@ -63,6 +66,7 @@ func seemsPositive(status string) bool {
 	return false
 }
 
+// seemsReadyStatus checks if the status is in xx/yy format where xx and yy are numbers
 func seemsReadyStatus(status string) (color.Color, bool) {
 	if strings.Count(status, "/") == 1 {
 		ready := strings.Split(status, "/")

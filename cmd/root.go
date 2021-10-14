@@ -58,9 +58,8 @@ func NewRootCmd() *cobra.Command {
 			p.Print(string(output), Stdout)
 		},
 	}
-	cmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.limner.yaml)")
+	cmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.limner.yaml)")
 	cmd.PersistentFlags().BoolVarP(&plainMode, "plain", "p", false, "Do not colorize the output")
-	// cmd.PersistentFlags().BoolVar(&lightBg, "light-bg", false, "Adapt a more suitable color theme in a terminal with light background")
 	cmd.PersistentFlags().StringVarP(&mustType, "type", "t", "", "Force limner to view the output as a specific type: yaml / json / xml / table, etc.")
 
 	return cmd
@@ -77,7 +76,7 @@ func Execute() {
 }
 
 func init() {
-	cobra.OnInitialize(initConfig)
+	cobra.OnInitialize(initConfig, printer.InitColorTheme)
 }
 
 // initConfig reads in config file and ENV variables if set.

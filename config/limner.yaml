@@ -1,0 +1,9 @@
+key_color: Red
+string_color: Green
+bool_color: Yellow
+number_color: Yellow
+null_color: Cyan
+header_color: Blue
+column_colors:
+  - White
+  - Cyan

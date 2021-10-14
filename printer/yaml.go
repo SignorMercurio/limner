@@ -23,7 +23,7 @@ func NewYamlPrinter() *YamlPrinter {
 	return &YamlPrinter{}
 }
 
-// printYaml prints a line as yaml format
+// printYaml prints a line to writer w in yaml format
 func (yp *YamlPrinter) printYaml(line string, w io.Writer) {
 	indentCnt := getIndent(line)
 	indent := toSpaces(indentCnt)
@@ -95,7 +95,7 @@ func (yp *YamlPrinter) inArray(line string) bool {
 	return strings.HasPrefix(line, "- ")
 }
 
-// colorString colorizes the yaml string
+// colorString colorizes yaml strings
 func (yp *YamlPrinter) colorString(line string) string {
 	format := `%s`
 	if yp.isString(line) {
@@ -107,7 +107,7 @@ func (yp *YamlPrinter) colorString(line string) string {
 	return fmt.Sprintf(format, color.Apply(line, StringColor))
 }
 
-// colorKey colorizes the yaml key
+// colorKey colorizes yaml keys
 func (yp *YamlPrinter) colorKey(key string) string {
 	format := "%s"
 	if strings.HasSuffix(key, ":") {
@@ -123,7 +123,7 @@ func (yp *YamlPrinter) colorKey(key string) string {
 	return fmt.Sprintf(format, color.Apply(key, KeyColor))
 }
 
-// colorValue colorizes the yaml value
+// colorValue colorizes yaml values
 func (yp *YamlPrinter) colorValue(value string) string {
 	if value == "{}" {
 		return "{}"

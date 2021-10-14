@@ -25,19 +25,19 @@ Limner colorizes and transforms CLI outputs.
 Colorize tables:
 
 ```bash
-kubectl get po|lm
+kubectl get po | lm
 ```
 
 Colorize YAML files:
 
 ```bash
-cat nginx-deploy.yml|lm
+cat nginx-deploy.yml | lm
 ```
 
 Colorize JSON responses:
 
 ```bash
-curl https://api.github.com/SignorMercurio|lm
+curl https://api.github.com/SignorMercurio | lm
 ```
 
 // TODO
@@ -48,14 +48,34 @@ When you choose to output the result to a file, or pass the result to other prog
 
 ### Customize color themes
 
-// TODO
+You can use a config file to customize color themes. By default, limner will try to read `$HOME/.limner.yaml` but you can specify the config file with `-c`, for example:
+
+```bash
+k get po | lm -c config/limner.yml
+```
+
+And here's an example of config file, which uses the same color theme as the default one:
+
+```yaml
+key_color: Red
+string_color: Green
+bool_color: Yellow
+number_color: Yellow
+null_color: Cyan
+header_color: Blue
+column_colors:
+  - White
+  - Cyan
+```
+
+Possible colors include `Red`, `Green`, `Yellow`, `Cyan`, `Blue`, `Magenta`, `White` and `Black`.
 
 ### Enforce types on the output
 
-Specify `-t` to force limner to view the output as a specific type: YAML / JSON / XML / table, etc. For example:
+Specify `-t` to force limner to view the output as a specific type: YAML / JSON / table, etc. For example:
 
 ```bash
-k describe deploy/nginx | lm -t yml
+k describe deploy/nginx | lm -t yaml
 ```
 
 > You don't actually need to use the flag at most of the time because limner automatically detects the possible format of the output.
@@ -78,8 +98,7 @@ Thank you for willing to contribute to this project!
 - [x] Basic colorization
   - [x] YAML
   - [x] JSON
-  - [ ] Tables
-  - [ ] XML
+  - [x] Tables
   - [ ] ...
 - [ ] Simple data format transformation
   - [ ] YAML <-> JSON

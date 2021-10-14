@@ -40,7 +40,7 @@ func (tp *TablePrinter) isHeader(line string) bool {
 	return tp.firstLine || allCapital
 }
 
-// printTable prints a line as a row in the table
+// printTable prints a line to writer w as a row in the table
 func (tp *TablePrinter) printTable(w io.Writer, line string, colors []color.Color) {
 	columns := spaces.Split(line, -1)
 	spaceIndices := spaces.FindAllStringIndex(line, -1)
