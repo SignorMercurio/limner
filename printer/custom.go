@@ -15,6 +15,6 @@ type CustomPrinter struct {
 
 func (cp *CustomPrinter) Print(buf string, w io.Writer) {
 	for _, line := range strings.Split(buf, "\n") {
-		fmt.Fprintf(w, "%s\n", color.Apply(line, cp.ColorPicker(line)))
+		fmt.Fprintln(w, color.Apply(line, cp.ColorPicker(line)))
 	}
 }

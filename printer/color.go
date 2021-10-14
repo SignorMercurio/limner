@@ -33,12 +33,12 @@ func (cp *ColorPrinter) Print(buf string, w io.Writer) {
 	default:
 		// otherwise, try to determine the type
 		switch {
-		case shouldYaml(buf):
-			printer = NewYamlPrinter()
 		case shouldJson(buf, &jsonObj):
 			printer = NewJsonPrinter(jsonObj)
 		case shouldTable(buf):
 			printer = NewTablePrinter(ColorStatus)
+		case shouldYaml(buf):
+			printer = NewYamlPrinter()
 		}
 	}
 	// Finally, we can print something

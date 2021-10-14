@@ -55,15 +55,10 @@ func (jp *JsonPrinter) printJson(line string, w io.Writer) {
 
 // colorKey colorizes json keys
 func (jp *JsonPrinter) colorKey(key string) string {
-	format := "%s"
-	if strings.HasSuffix(key, ":") {
-		format += ":"
-	}
-
 	key = strings.TrimSuffix(key, ":")
 	key = strings.Trim(key, `"`)
 
-	return fmt.Sprintf(format, color.Apply(key, KeyColor))
+	return fmt.Sprint(color.Apply(key, KeyColor))
 }
 
 // colorValue colorizes json values

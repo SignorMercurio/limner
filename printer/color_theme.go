@@ -41,11 +41,11 @@ func str2color(colorStr string) color.Color {
 	}
 }
 
-// strSlice2color is the slice version of str2color
-func strSlice2color(colorStrSlice []string) []color.Color {
+// slice2color is the slice version of str2color
+func slice2color(colorSlice []interface{}) []color.Color {
 	var colors []color.Color
-	for _, v := range colorStrSlice {
-		colors = append(colors, str2color(v))
+	for _, v := range colorSlice {
+		colors = append(colors, str2color(v.(string)))
 	}
 	return colors
 }
@@ -70,8 +70,8 @@ func InitColorTheme() {
 			case "header_color":
 				HeaderColor = colorVal
 			}
-		case []string:
-			ColumnColors = strSlice2color(val)
+		case []interface{}:
+			ColumnColors = slice2color(val)
 		}
 	}
 }
