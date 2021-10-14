@@ -14,7 +14,7 @@ type ColorPrinter struct {
 }
 
 func (cp *ColorPrinter) Print(buf string, w io.Writer) {
-	var printer Printer = &SingleColorPrinter{Color: StringColor}
+	var printer Printer = &SingleColorPrinter{Color: stringColor}
 	var jsonObj map[string]interface{}
 
 	// change the printer if type is already enforced

@@ -16,12 +16,12 @@ type TablePrinter struct {
 func (tp *TablePrinter) Print(buf string, w io.Writer) {
 	for _, line := range strings.Split(buf, "\n") {
 		if tp.isHeader(line) {
-			fmt.Fprintln(w, color.Apply(line, HeaderColor))
+			fmt.Fprintln(w, color.Apply(line, headerColor))
 			tp.firstLine = false
 			continue
 		}
 
-		tp.printTable(w, line, ColumnColors)
+		tp.printTable(w, line, columnColors)
 	}
 }
 

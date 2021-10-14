@@ -6,14 +6,14 @@ import (
 )
 
 var (
-	KeyColor    = color.Red
-	StringColor = color.Green
-	BoolColor   = color.Yellow
-	NumberColor = color.Yellow
-	NullColor   = color.Cyan
-	HeaderColor = color.Blue
+	keyColor    = color.Red
+	stringColor = color.Green
+	boolColor   = color.Yellow
+	numberColor = color.Yellow
+	nullColor   = color.Cyan
+	headerColor = color.Blue
 
-	ColumnColors = []color.Color{
+	columnColors = []color.Color{
 		color.White,
 		color.Cyan,
 	}
@@ -58,20 +58,20 @@ func InitColorTheme() {
 			colorVal := str2color(val)
 			switch key {
 			case "key_color":
-				KeyColor = colorVal
+				keyColor = colorVal
 			case "string_color":
-				StringColor = colorVal
+				stringColor = colorVal
 			case "bool_color":
-				BoolColor = colorVal
+				boolColor = colorVal
 			case "number_color":
-				NumberColor = colorVal
+				numberColor = colorVal
 			case "null_color":
-				NullColor = colorVal
+				nullColor = colorVal
 			case "header_color":
-				HeaderColor = colorVal
+				headerColor = colorVal
 			}
 		case []interface{}:
-			ColumnColors = slice2color(val)
+			columnColors = slice2color(val)
 		}
 	}
 }

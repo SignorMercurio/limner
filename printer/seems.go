@@ -72,12 +72,11 @@ func seemsReadyStatus(status string) (color.Color, bool) {
 		ready := strings.Split(status, "/")
 		if ready[0] == ready[1] {
 			return color.Green, true
-		} else {
-			_, e1 := strconv.Atoi(ready[0])
-			_, e2 := strconv.Atoi(ready[1])
-			if e1 == nil && e2 == nil {
-				return color.Yellow, true
-			}
+		}
+		_, e1 := strconv.Atoi(ready[0])
+		_, e2 := strconv.Atoi(ready[1])
+		if e1 == nil && e2 == nil {
+			return color.Yellow, true
 		}
 	}
 	return 0, false

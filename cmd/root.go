@@ -7,7 +7,6 @@ import (
 
 	"github.com/SignorMercurio/limner/printer"
 	"github.com/mattn/go-colorable"
-	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -18,9 +17,8 @@ var (
 	mustType  string
 	input     []byte
 	output    []byte
-	Stdout    = colorable.NewColorableStdout()
+	stdout    = colorable.NewColorableStdout()
 	RootCmd   = NewRootCmd()
-	Log       = logrus.New()
 )
 
 // getPrinter returns a ColorPrinter
@@ -55,7 +53,7 @@ func NewRootCmd() *cobra.Command {
 			} else {
 				p = getPrinter(mustType)
 			}
-			p.Print(string(output), Stdout)
+			p.Print(string(output), stdout)
 		},
 	}
 	cmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.limner.yaml)")
@@ -71,7 +69,7 @@ func Execute() {
 	defer func() { recover() }()
 	err := RootCmd.Execute()
 	if err != nil {
-		Log.Panic(err)
+		fmt.Println(err)
 	}
 }
 

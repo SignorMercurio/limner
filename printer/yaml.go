@@ -64,10 +64,10 @@ func (yp *YamlPrinter) printYaml(line string, w io.Writer) {
 	columns := spaces.Split(line, -1)
 	if len(columns) >= 2 {
 		if !yp.inTable {
-			fmt.Fprintln(w, color.Apply(key, HeaderColor))
+			fmt.Fprintln(w, color.Apply(key, headerColor))
 			yp.inTable = true
 		} else {
-			NewTablePrinter(ColorStatus).printTable(w, key, ColumnColors)
+			NewTablePrinter(ColorStatus).printTable(w, key, columnColors)
 		}
 		return
 	}
@@ -104,7 +104,7 @@ func (yp *YamlPrinter) colorString(line string) string {
 
 	line = strings.Trim(line, `"`)
 
-	return fmt.Sprintf(format, color.Apply(line, StringColor))
+	return fmt.Sprintf(format, color.Apply(line, stringColor))
 }
 
 // colorKey colorizes yaml keys
@@ -120,7 +120,7 @@ func (yp *YamlPrinter) colorKey(key string) string {
 	key = strings.TrimSuffix(key, ":")
 	key = strings.TrimPrefix(key, "- ")
 
-	return fmt.Sprintf(format, color.Apply(key, KeyColor))
+	return fmt.Sprintf(format, color.Apply(key, keyColor))
 }
 
 // colorValue colorizes yaml values

@@ -8,7 +8,10 @@
 
 Limner colorizes and transforms CLI outputs.
 
-<a href="https://github.com/SignorMercurio/limner/blob/main/LICENSE"> <img src="https://img.shields.io/github/license/SignorMercurio/limner?style=for-the-badge" /> </a>
+<a href="https://github.com/SignorMercurio/limner/actions"><img src="https://img.shields.io/github/workflow/status/SignorMercurio/limner/Go?logo=GitHub" /></a>
+<a href="https://codecov.io/gh/SignorMercurio/limner"><img src="https://codecov.io/gh/SignorMercurio/limner/branch/main/graph/badge.svg?token=PKWZK3BR9R"/></a>
+<a href="https://goreportcard.com/report/github.com/SignorMercurio/limner"><img src="https://goreportcard.com/badge/github.com/SignorMercurio/limner" /></a>
+<a href="https://github.com/SignorMercurio/limner/blob/main/LICENSE"> <img src="https://img.shields.io/github/license/SignorMercurio/limner" /></a>
 
 </div>
 

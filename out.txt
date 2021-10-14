@@ -1,5 +1,0 @@
-[34mNAME                     READY   STATUS              RESTARTS   AGE[0m
-[37mnginx-7848d4b86f-2pq9t[0m   [32m1/1[0m     [32mRunning[0m             [36m1[0m          [37m23h[0m
-[37mnginx-7848d4b86f-mk9pw[0m   [33m0/1[0m     [31mCrashLoopBackoff[0m    [36m1[0m          [37m31h[0m
-[37mnginx-7848d4b86f-tffzh[0m   [33m0/1[0m     [33mContainerCreating[0m   [36m1[0m          [37m23h[0m
-[34m[0m

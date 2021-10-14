@@ -43,12 +43,12 @@ func isNum(value string) bool {
 func getColorByValueType(value string) color.Color {
 	switch {
 	case isNull(value):
-		return NullColor
+		return nullColor
 	case isBool(value):
-		return BoolColor
+		return boolColor
 	case isNum(value):
-		return NumberColor
+		return numberColor
 	default:
-		return StringColor
+		return stringColor
 	}
 }

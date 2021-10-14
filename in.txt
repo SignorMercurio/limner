@@ -1,4 +1,0 @@
-NAME                     READY   STATUS              RESTARTS   AGE
-nginx-7848d4b86f-2pq9t   1/1     Running             1          23h
-nginx-7848d4b86f-mk9pw   0/1     CrashLoopBackoff    1          31h
-nginx-7848d4b86f-tffzh   0/1     ContainerCreating   1          23h
