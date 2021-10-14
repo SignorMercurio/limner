@@ -17,13 +17,49 @@ Limner colorizes and transforms CLI outputs.
 
 <a href="https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu" target="_blank"><img src="https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu.svg" /></a>
 
+## Motivation
+
+When playing with `kubectl`, I sometimes found it hard to extract the information I needed most from the extermely **long, mono-colored** output produced by the CLI. The same things happens when I'm using `curl` to test some REST APIs which usually return a long string of JSON.
+
+Of course I can use GUI tools like *Kubernetes Dashboard* and *Postman*, but for simple operations that need to be performed swiftly, CLIs have their own advantages. Therefore, I made limner to bring some changes to the CLIs' output.
+
 ## Installation
 
-// TODO
+### Download a release binary
+Go to [Release Page](https://github.com/SignorMercurio/limner/releases), download a release and run:
+```bash
+tar zxvf lm_[version]_[os]_[arch].tar.gz
+cd lm_[version]_[os]_[arch]
+mv ./lm_[os]_[arch] ./lm
+chmod +x ./lm
+[your command] | ./lm
+```
+
+Remember to replace the text in `[]`.
+
+### Manual Installation
+
+1. You'll need Go [installed](https://golang.org/doc/install).
+
+2. Clone the repo:
+```bash
+git clone https://github.com/SignorMercurio/limner.git
+cd limner
+go build -o lm .
+```
+
+3. Run the command:
+```bash
+[your command] | ./lm
+```
+
+> Note: It's strongly recommended to add the binary to your $PATH, e.g. `/usr/local/bin`.
 
 ## Usage
 
 ### Basic Usage
+
+In most cases, you don't need to append any arguments when using limner as it automatically detects the format of the output.
 
 Colorize tables:
 
@@ -43,7 +79,36 @@ Colorize JSON responses:
 curl https://api.github.com/SignorMercurio | lm
 ```
 
-// TODO
+> TODO: Add support for more formats and transformation between different formats.
+
+### Create a shortcut
+
+Take `kubectl` as an example. 
+
+#### Bash
+
+Suppose you've already [configured autocompletion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/) for `kubectl` (Optional).
+
+In your `.bash_profile` or `.bashrc`, append the following lines:
+```bash
+function k() {kubectl $@ | lm}
+complete -o default -F __start_kubectl k
+```
+
+#### Zsh
+
+Suppose you've already [configured autocompletion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/) for `kubectl` (Optional).
+
+In your `.zprofile` or `.zshrc`, append the following lines:
+```bash
+function k() {kubectl $@ | lm}
+compdef k=kubectl
+```
+
+After the above steps, you'll be able to use `kubectl` with color and autocompletion like:
+```bash
+k get po
+```
 
 ### Non-terminal output
 
@@ -54,7 +119,7 @@ When you choose to output the result to a file, or pass the result to other prog
 You can use a config file to customize color themes. By default, limner will try to read `$HOME/.limner.yaml` but you can specify the config file with `-c`, for example:
 
 ```bash
-k get po | lm -c config/limner.yml
+kubectl get po | lm -c config/limner.yml
 ```
 
 And here's an example of config file, which uses the same color theme as the default one:
@@ -78,12 +143,10 @@ Possible colors include `Red`, `Green`, `Yellow`, `Cyan`, `Blue`, `Magenta`, `Wh
 Specify `-t` to force limner to view the output as a specific type: YAML / JSON / table, etc. For example:
 
 ```bash
-k describe deploy/nginx | lm -t yaml
+kubectl describe deploy/nginx | lm -t yaml
 ```
 
-> You don't actually need to use the flag at most of the time because limner automatically detects the possible format of the output.
-
-// TODO
+> Note: Specifying `-t yaml` in `kubectl describe` is not necessary.
 
 ## Contributions
 
