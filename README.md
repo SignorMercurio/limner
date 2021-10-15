@@ -13,9 +13,9 @@ Limner colorizes and transforms CLI outputs.
 <a href="https://goreportcard.com/report/github.com/SignorMercurio/limner"><img src="https://goreportcard.com/badge/github.com/SignorMercurio/limner" /></a>
 <a href="https://github.com/SignorMercurio/limner/blob/main/LICENSE"> <img src="https://img.shields.io/github/license/SignorMercurio/limner" /></a>
 
-</div>
-
 <a href="https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu" target="_blank"><img src="https://asciinema.org/a/ZtR2TaQPJWSUwTSIInSKZmrFu.svg" /></a>
+
+</div>
 
 ## Motivation
 
