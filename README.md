@@ -21,12 +21,14 @@ Limner colorizes and transforms CLI outputs.
 
 When playing with `kubectl`, I sometimes found it hard to extract the information I needed most from the extermely **long, mono-colored** output produced by the CLI. The same things happens when I'm using `curl` to test some REST APIs which usually return a long string of JSON.
 
-Of course I can use GUI tools like *Kubernetes Dashboard* and *Postman*, but for simple operations that need to be performed swiftly, CLIs have their own advantages. Therefore, I made limner to bring some changes to the CLIs' output.
+Of course I can use GUI tools like _Kubernetes Dashboard_ and _Postman_, but for simple operations that need to be performed swiftly, CLIs have their own advantages. Therefore, I made limner to bring some changes to the CLIs' output.
 
 ## Installation
 
 ### Download a release binary
+
 Go to [Release Page](https://github.com/SignorMercurio/limner/releases), download a release and run:
+
 ```bash
 tar zxvf lm_[version]_[os]_[arch].tar.gz
 cd lm_[version]_[os]_[arch]
@@ -42,6 +44,7 @@ Remember to replace the text in `[]`.
 1. You'll need Go [installed](https://golang.org/doc/install).
 
 2. Clone the repo:
+
 ```bash
 git clone https://github.com/SignorMercurio/limner.git
 cd limner
@@ -49,6 +52,7 @@ go build -o lm .
 ```
 
 3. Run the command:
+
 ```bash
 [your command] | ./lm
 ```
@@ -61,35 +65,60 @@ go build -o lm .
 
 In most cases, you don't need to append any arguments when using limner as it automatically detects the format of the output.
 
-Colorize tables:
+#### Colorize tables
 
 ```bash
 kubectl get po | lm
 ```
 
-Colorize YAML files:
+![Table colorization](img/table.png)
+
+#### Colorize YAML files
 
 ```bash
-cat nginx-deploy.yml | lm
+kubectl describe deploy/nginx | lm
 ```
 
-Colorize JSON responses:
+![YAML colorization](img/yml.png)
+
+#### Colorize JSON responses
 
 ```bash
-curl https://api.github.com/users/SignorMercurio | lm
+curl -s https://api.github.com/users/SignorMercurio | lm
 ```
+
+![JSON colorization](img/json.png)
+
+#### Transform YAML to JSON
+
+```bash
+cat nginx/deploy.yml | lm tr -i yaml -o json
+```
+
+You can always omit `-i yaml` as long as the format of input is YAML.
+
+![YAML->JSON transformation](img/yml2json.png)
+
+#### Transform JSON to YAML
+
+```bash
+curl -s https://jsonplaceholder.typicode.com/users/1/albums | lm tr -o yml
+```
+
+![JSON->YAML transformation](img/json2yml.png)
 
 > TODO: Add support for more formats and transformation between different formats.
 
 ### Create a shortcut
 
-Take `kubectl` as an example. 
+Take `kubectl` as an example.
 
 #### Bash
 
 Suppose you've already [configured autocompletion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/) for `kubectl` (Optional).
 
 In your `.bash_profile` or `.bashrc`, append the following lines:
+
 ```bash
 function k() {kubectl $@ | lm}
 complete -o default -F __start_kubectl k
@@ -100,15 +129,15 @@ complete -o default -F __start_kubectl k
 Suppose you've already [configured autocompletion](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/) for `kubectl` (Optional).
 
 In your `.zprofile` or `.zshrc`, append the following lines:
+
 ```bash
 function k() {kubectl $@ | lm}
 compdef k=kubectl
 ```
 
 After the above steps, you'll be able to use `kubectl` with color and autocompletion like:
-```bash
-k get po
-```
+
+![Using a shortcut](img/shortcut.png)
 
 ### Non-terminal output
 
@@ -166,8 +195,8 @@ Thank you for willing to contribute to this project!
   - [x] JSON
   - [x] Tables
   - [ ] ...
-- [ ] Simple data format transformation
-  - [ ] YAML <-> JSON
+- [x] Simple data format transformation
+  - [x] YAML <-> JSON
   - [ ] ...
 
 If you have any suggestions for the project, please don't hesitate to open an [issue](https://github.com/SignorMercurio/limner/issues) or [pull request](https://github.com/SignorMercurio/limner/pulls).

@@ -10,7 +10,7 @@ import (
 )
 
 type JsonPrinter struct {
-	jsonObj map[string]interface{}
+	jsonObj interface{}
 }
 
 func (jp *JsonPrinter) Print(buf string, w io.Writer) {
@@ -21,7 +21,7 @@ func (jp *JsonPrinter) Print(buf string, w io.Writer) {
 	}
 }
 
-func NewJsonPrinter(jsonObj map[string]interface{}) *JsonPrinter {
+func NewJsonPrinter(jsonObj interface{}) *JsonPrinter {
 	return &JsonPrinter{
 		jsonObj: jsonObj,
 	}

@@ -24,6 +24,14 @@ c:
 			dst: true,
 		},
 		{
+			name: "array only should also be yaml",
+			src: `- aaa: bbb
+  bbb: "ccc"
+- ccc: "ddd"
+  ddd: eee`,
+			dst: true,
+		},
+		{
 			name: "should not be yaml",
 			src: `a:0
 b-c:'d'`,
@@ -67,6 +75,20 @@ func TestShouldJson(t *testing.T) {
 			dst: true,
 		},
 		{
+			name: "array only should also be json",
+			src: `[
+	{
+		"aaa": "bbb",
+		"bbb": "ccc"
+	},
+	{
+		"ccc": "ddd",
+		"ddd": "eee"
+	}
+]`,
+			dst: true,
+		},
+		{
 			name: "should not be json",
 			src: `{
 	a:0
@@ -80,8 +102,12 @@ func TestShouldJson(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-			var obj map[string]interface{}
-			testutil.MustEqual(t, tt.dst, ShouldJson([]byte(tt.src), &obj))
+			src := []byte(tt.src)
+			_, isJson := ShouldJson(src)
+			if !isJson {
+				_, isJson = ShouldJsonArray(src)
+			}
+			testutil.MustEqual(t, tt.dst, isJson)
 		})
 	}
 }

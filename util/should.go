@@ -7,6 +7,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type Obj = map[string]interface{}
+
 // ShouldYaml returns if the buf should be in yaml format
 func ShouldYaml(buf string) bool {
 	// Look at the first 3 lines, so split into 3+1 parts
@@ -24,16 +26,38 @@ func ShouldYaml(buf string) bool {
 		result += splitted[i] + "\n"
 	}
 
-	out := make(map[string]interface{})
-	err := yaml.Unmarshal([]byte(result), out)
+	var (
+		outObj      Obj
+		outArray    []Obj
+		resultBytes = []byte(result)
+	)
+	errObj := yaml.Unmarshal(resultBytes, &outObj)
+	errArray := yaml.Unmarshal(resultBytes, &outArray)
 
-	return err == nil
+	return (errObj == nil) || (errArray == nil)
 }
 
-// ShouldJson returns if the buf should be in json format with the help of jsonObj
-func ShouldJson(buf []byte, jsonObj *map[string]interface{}) bool {
-	err := json.Unmarshal(buf, jsonObj)
-	return err == nil
+func ShouldJson(buf []byte) (interface{}, bool) {
+	if jsonObj, ok := ShouldJsonObj(buf); ok {
+		return jsonObj, true
+	} else if jsonArray, ok := ShouldJsonArray(buf); ok {
+		return *jsonArray, true
+	}
+	return nil, false
+}
+
+// ShouldJsonObj returns if the buf should be in simple json format
+func ShouldJsonObj(buf []byte) (*Obj, bool) {
+	var jsonObj Obj
+	err := json.Unmarshal(buf, &jsonObj)
+	return &jsonObj, err == nil
+}
+
+// ShouldJsonArray returns if the buf should be in json array format
+func ShouldJsonArray(buf []byte) (*[]Obj, bool) {
+	var jsonArray []Obj
+	err := json.Unmarshal(buf, &jsonArray)
+	return &jsonArray, err == nil
 }
 
 // ShouldTable returns if the buf should be in table format

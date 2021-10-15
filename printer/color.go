@@ -1,7 +1,6 @@
 package printer
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"strings"
@@ -15,26 +14,31 @@ type ColorPrinter struct {
 }
 
 func (cp *ColorPrinter) Print(buf string, w io.Writer) {
-	var printer Printer = &SingleColorPrinter{Color: stringColor}
-	var jsonObj map[string]interface{}
+	var (
+		printer Printer = &SingleColorPrinter{Color: stringColor}
+		bufByte         = []byte(buf)
+		jsonObj interface{}
+		isJson  bool
+	)
 
 	// change the printer if type is already enforced
 	switch cp.Type {
 	case "yaml", "yml":
 		printer = NewYamlPrinter()
 	case "json":
-		if err := json.Unmarshal([]byte(buf), &jsonObj); err != nil {
-			fmt.Fprintln(w, color.Apply("Failed to unmarshal json, using default printer", color.Yellow))
-		} else {
+		if jsonObj, isJson = util.ShouldJson(bufByte); isJson {
 			printer = NewJsonPrinter(jsonObj)
+		} else {
+			fmt.Fprintln(w, color.Apply("Failed to unmarshal json, using default printer", color.Yellow))
 		}
 	case "table":
 		printer = NewTablePrinter(ColorStatus)
-		// case "xml":
 	default:
 		// otherwise, try to determine the type
+		// try json first
+		jsonObj, isJson = util.ShouldJson(bufByte)
 		switch {
-		case util.ShouldJson([]byte(buf), &jsonObj):
+		case isJson:
 			printer = NewJsonPrinter(jsonObj)
 		case util.ShouldTable(buf):
 			printer = NewTablePrinter(ColorStatus)

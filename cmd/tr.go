@@ -27,7 +27,8 @@ func NewTrCmd() *cobra.Command {
 		Short: "tr helps to transform data format",
 		Long: `tr helps to transform data format
 Example:
-	curl -s https://api.github.com/users/SignorMercurio | lm tr -i json -o yaml ("-i json" can be omitted)`,
+	curl -s https://api.github.com/users/SignorMercurio | lm tr -i json -o yaml ("-i json" can be omitted)
+	cat nginx.yml | lm tr -o json`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			var err error
 			if inType == outType {
