@@ -1,4 +1,4 @@
-package printer
+package util
 
 import (
 	"encoding/json"
@@ -7,8 +7,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// shouldYaml returns if the buf should be in yaml format
-func shouldYaml(buf string) bool {
+// ShouldYaml returns if the buf should be in yaml format
+func ShouldYaml(buf string) bool {
 	// Look at the first 3 lines, so split into 3+1 parts
 	lines := 3
 	splitted := strings.SplitN(buf, "\n", lines+1)
@@ -30,14 +30,14 @@ func shouldYaml(buf string) bool {
 	return err == nil
 }
 
-// shouldJson returns if the buf should be in json format with the help of jsonObj
-func shouldJson(buf string, jsonObj *map[string]interface{}) bool {
-	err := json.Unmarshal([]byte(buf), jsonObj)
+// ShouldJson returns if the buf should be in json format with the help of jsonObj
+func ShouldJson(buf []byte, jsonObj *map[string]interface{}) bool {
+	err := json.Unmarshal(buf, jsonObj)
 	return err == nil
 }
 
-// shouldTable returns if the buf should be in table format
-func shouldTable(buf string) bool {
+// ShouldTable returns if the buf should be in table format
+func ShouldTable(buf string) bool {
 	lines := 2
 	splitted := strings.SplitN(buf, "\n", lines+1)
 	actualLines := len(splitted)

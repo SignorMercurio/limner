@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/SignorMercurio/limner/color"
+	"github.com/SignorMercurio/limner/util"
 )
 
 type ColorPrinter struct {
@@ -33,11 +34,11 @@ func (cp *ColorPrinter) Print(buf string, w io.Writer) {
 	default:
 		// otherwise, try to determine the type
 		switch {
-		case shouldJson(buf, &jsonObj):
+		case util.ShouldJson([]byte(buf), &jsonObj):
 			printer = NewJsonPrinter(jsonObj)
-		case shouldTable(buf):
+		case util.ShouldTable(buf):
 			printer = NewTablePrinter(ColorStatus)
-		case shouldYaml(buf):
+		case util.ShouldYaml(buf):
 			printer = NewYamlPrinter()
 		}
 	}

@@ -40,7 +40,7 @@ cat nginx-deploy.yml | lm
 Colorize JSON responses:
 
 ```bash
-curl https://api.github.com/SignorMercurio | lm
+curl https://api.github.com/users/SignorMercurio | lm
 ```
 
 // TODO

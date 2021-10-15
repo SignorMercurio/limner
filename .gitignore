@@ -1,2 +1,5 @@
 .vscode
 bin
+*.sh
+*.txt
+*.out

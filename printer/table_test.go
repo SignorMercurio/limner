@@ -9,10 +9,9 @@ import (
 
 func TestTablePrinter(t *testing.T) {
 	tests := []struct {
-		name       string
-		src        string
-		dst        string
-		onlyNoType bool
+		name string
+		src  string
+		dst  string
 	}{
 		{
 			name: "k get po",
@@ -28,12 +27,6 @@ nginx-7848d4b86f-tffzh   0/1     ContainerCreating   1          23h
 [34m[0m
 `,
 		},
-		{
-			name: "one line only",
-			src:  `hello world!`,
-			dst: `[32mhello world![0m`,
-			onlyNoType: true,
-		},
 	}
 
 	for _, tt := range tests {
@@ -46,11 +39,9 @@ nginx-7848d4b86f-tffzh   0/1     ContainerCreating   1          23h
 			testutil.MustEqual(t, tt.dst, w.String())
 			w.Reset()
 
-			if !tt.onlyNoType {
-				p = &ColorPrinter{Type: "table"}
-				p.Print(tt.src, &w)
-				testutil.MustEqual(t, tt.dst, w.String())
-			}
+			p = &ColorPrinter{Type: "table"}
+			p.Print(tt.src, &w)
+			testutil.MustEqual(t, tt.dst, w.String())
 		})
 	}
 }

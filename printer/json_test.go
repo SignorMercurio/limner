@@ -15,7 +15,7 @@ func TestJsonPrinter(t *testing.T) {
 		onlyForceType bool
 	}{
 		{
-			name: "curl -s https://api.github.com/SignorMercurio",
+			name: "curl -s https://api.github.com/users/SignorMercurio",
 			src: `{
   "login": "SignorMercurio",
   "id": 32540679,

@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 
+	"github.com/SignorMercurio/limner/color"
 	"github.com/SignorMercurio/limner/printer"
 	"github.com/mattn/go-colorable"
 	"github.com/spf13/cobra"
@@ -69,7 +70,7 @@ func Execute() {
 	defer func() { recover() }()
 	err := RootCmd.Execute()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(color.Apply(err.Error(), color.Red))
 	}
 }
 
