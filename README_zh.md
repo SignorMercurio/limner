@@ -181,7 +181,7 @@ kubectl describe deploy/nginx | lm -t yaml
 
 ### 格式转换
 
-正如在 [YAML 转 JSON](#YAML%20转%20JSON) 中看到的那样，只需要：
+正如在 [YAML 转 JSON](#yaml-转-json) 中看到的那样，只需要：
 
 ```bash
 [something of input type] | lm -o [output type]

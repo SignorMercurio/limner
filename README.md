@@ -181,7 +181,7 @@ kubectl describe deploy/nginx | lm -t yaml
 
 ### Tranformation
 
-As you can see from the section [Transform YAML to JSON](#Transform%20YAML%20to%20JSON), all you need is:
+As you can see from the section [Transform YAML to JSON](#transform-yaml-to-json), all you need is:
 
 ```bash
 [something of input type] | lm -o [output type]
