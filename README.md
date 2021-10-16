@@ -153,7 +153,7 @@ You can use a config file to customize color themes. By default, limner will try
 kubectl get po | lm -c config/limner.yml
 ```
 
-And here's an example of config file, which uses the same color theme as the default one:
+The default config file looks like:
 
 ```yaml
 key_color: Red
@@ -164,6 +164,20 @@ null_color: Cyan
 header_color: Blue
 column_colors:
   - White
+  - Cyan
+```
+
+And here's an example of config file, which is suitable for a light-background terminal:
+
+```yaml
+key_color: Blue
+string_color: Green
+bool_color: Red
+number_color: Red
+null_color: Cyan
+header_color: Magenta
+column_colors:
+  - Black
   - Cyan
 ```
 

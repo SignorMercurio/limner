@@ -117,7 +117,7 @@ curl -s https://jsonplaceholder.typicode.com/users/1/albums | lm tr -o yml
 
 #### Bash
 
-假设你已经为 `kubectl` 配置了 [自动补全](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)（非必需）。
+假设你已经为 `kubectl` 配置了 [自动补全](https://kubernetes.io/zh/docs/tasks/tools/included/optional-kubectl-configs-bash-linux/)（非必需）。
 
 在你的 `.bash_profile` 或 `.bashrc` 文件中, 添加：
 
@@ -128,7 +128,7 @@ complete -o default -F __start_kubectl k
 
 #### Zsh
 
-假设你已经为 `kubectl` 配置了 [自动补全](https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/)（非必需）。
+假设你已经为 `kubectl` 配置了 [自动补全](https://kubernetes.io/zh/docs/tasks/tools/included/optional-kubectl-configs-zsh/)（非必需）。
 
 在你的 `.zprofile` 或 `.zshrc` 文件中，添加：
 
@@ -153,7 +153,7 @@ compdef k=kubectl
 kubectl get po | lm -c config/limner.yml
 ```
 
-颜色配置文件的一个示例如下（默认配置）：
+默认配置：
 
 ```yaml
 key_color: Red
@@ -164,6 +164,20 @@ null_color: Cyan
 header_color: Blue
 column_colors:
   - White
+  - Cyan
+```
+
+颜色配置文件的一个示例如下（适用于亮色背景终端）：
+
+```yaml
+key_color: Blue
+string_color: Green
+bool_color: Red
+number_color: Red
+null_color: Cyan
+header_color: Magenta
+column_colors:
+  - Black
   - Cyan
 ```
 
