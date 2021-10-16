@@ -8,6 +8,8 @@
 
 Limner colorizes and transforms CLI outputs.
 
+English | [简体中文](README_zh.md)
+
 <a href="https://github.com/SignorMercurio/limner/actions"><img src="https://img.shields.io/github/workflow/status/SignorMercurio/limner/Go?logo=GitHub" /></a>
 <a href="https://codecov.io/gh/SignorMercurio/limner"><img src="https://codecov.io/gh/SignorMercurio/limner/branch/main/graph/badge.svg?token=PKWZK3BR9R"/></a>
 <a href="https://goreportcard.com/report/github.com/SignorMercurio/limner"><img src="https://goreportcard.com/badge/github.com/SignorMercurio/limner" /></a>
@@ -95,7 +97,7 @@ curl -s https://api.github.com/users/SignorMercurio | lm
 cat nginx/deploy.yml | lm tr -i yaml -o json
 ```
 
-You can always omit `-i yaml` as long as the format of input is YAML.
+You can always omit `-i yaml` as long as the format of input is YAML (or looks like YAML). The same is true for other formats.
 
 ![YAML->JSON transformation](img/yml2json.png)
 
@@ -176,6 +178,16 @@ kubectl describe deploy/nginx | lm -t yaml
 ```
 
 > Note: Specifying `-t yaml` in `kubectl describe` is not necessary.
+
+### Tranformation
+
+As you can see from the section [Transform YAML to JSON](#Transform%20YAML%20to%20JSON), all you need is:
+
+```bash
+[something of input type] | lm -o [output type]
+```
+
+Use `-i [input type]` if you want to force the limner to view the input as a specific type.
 
 ## Contributions
 
