@@ -109,6 +109,8 @@ curl -s https://jsonplaceholder.typicode.com/users/1/albums | lm tr -o yml
 
 ![JSON->YAML transformation](img/json2yml.png)
 
+> Note: Limner is only designed for dealing with outputs. Do not use it with commands that need to receive input from stdin.
+
 > TODO: Add support for more formats and transformation between different formats.
 
 ### Create a shortcut
@@ -124,6 +126,7 @@ In your `.bash_profile` or `.bashrc`, append the following lines:
 ```bash
 function k() {kubectl $@ | lm}
 complete -o default -F __start_kubectl k
+alias kx="kubectl exec -it"
 ```
 
 #### Zsh
@@ -135,6 +138,7 @@ In your `.zprofile` or `.zshrc`, append the following lines:
 ```bash
 function k() {kubectl $@ | lm}
 compdef k=kubectl
+alias kx="kubectl exec -it"
 ```
 
 After the above steps, you'll be able to use `kubectl` with color and autocompletion like:
